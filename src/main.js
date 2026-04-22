@@ -76,5 +76,11 @@ if (dirBtn) {
 function updateDirIcon(dir) {
   if (dirBtn) {
     dirBtn.textContent = dir;
+    // INBOUND일 경우 버튼 색상을 강조하는 클래스 적용
+    if (dir === 'INBOUND') {
+      dirBtn.classList.add('inbound');
+    } else {
+      dirBtn.classList.remove('inbound');
+    }
   }
 }
