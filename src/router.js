@@ -42,9 +42,8 @@ export function createAppShell() {
         <span class="tab-icon">⚙️</span>
         <span class="tab-label">설정</span>
       </button>
+      <div class="app-version">v26.1.4</div>
     </nav>
-
-    <div class="app-version">v26.1.4</div>
 
     <div class="toast" id="globalToast" role="status" aria-live="polite"></div>
   `;
