@@ -28,6 +28,8 @@ export function calculateTimeline(takeoffTime, durations) {
   const prepTime = subtractMinutes(departureTime, d.preparation);
   const wakeupTime = subtractMinutes(prepTime, d.wakeup);
 
+  const isINBOUND = localStorage.getItem('darimT_direction') === 'INBOUND';
+
   return [
     {
       id: 'takeoff',
@@ -55,8 +57,8 @@ export function calculateTimeline(takeoffTime, durations) {
     },
     {
       id: 'departure',
-      label: '집에서 출발',
-      emoji: '🚗',
+      label: isINBOUND ? '픽업' : '집에서 출발',
+      emoji: isINBOUND ? '🚌' : '🚗',
       time: departureTime,
       duration: d.preparation,
       isAlarm: false,

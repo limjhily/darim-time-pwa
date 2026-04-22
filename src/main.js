@@ -53,3 +53,32 @@ function updateThemeIcon(theme) {
   themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
   themeBtn.setAttribute('title', theme === 'dark' ? '라이트 모드로 변경' : '다크 모드로 변경');
 }
+
+// === 비행 방향(OUTBOUND/INBOUND) 관리 ===
+const DIR_KEY = 'darimT_direction';
+const dirBtn = document.getElementById('directionToggleBtn');
+
+const savedDir = localStorage.getItem(DIR_KEY) || 'OUTBOUND';
+updateDirIcon(savedDir);
+
+if (dirBtn) {
+  dirBtn.addEventListener('click', () => {
+    const current = localStorage.getItem(DIR_KEY) || 'OUTBOUND';
+    const next = current === 'OUTBOUND' ? 'INBOUND' : 'OUTBOUND';
+    localStorage.setItem(DIR_KEY, next);
+    updateDirIcon(next);
+
+    // 타임라인 다시 그리기 (home.js의 로직 업데이트 유도)
+    import('./pages/home.js').then((module) => {
+      if (document.getElementById('timelineSection')) {
+        module.refreshTimeline?.() || window.location.reload();
+      }
+    });
+  });
+}
+
+function updateDirIcon(dir) {
+  if (dirBtn) {
+    dirBtn.textContent = dir;
+  }
+}
