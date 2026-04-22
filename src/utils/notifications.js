@@ -66,13 +66,28 @@ export async function scheduleAlarm(wakeupTime) {
     // Web Notification 예약 (권한 있는 경우)
     const timerId = setTimeout(() => {
       try {
-        new Notification('⏰ 기상 시간입니다!', {
+        const title = '⏰ 기상 시간입니다!';
+        const options = {
           body: '비행 준비를 시작하세요. DaRim\'s Moment ✈️',
           icon: '/icons/icon-192.png',
           badge: '/icons/icon-192.png',
           tag: 'darimT-alarm',
+          vibrate: [200, 100, 200, 100, 200], // 진동 패턴 (지원하는 모바일 기기용)
           requireInteraction: true,
-        });
+        };
+
+        // 모바일 PWA에서는 ServiceWorker를 통한 알림이 가장 안정적임
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification(title, options);
+          }).catch(() => {
+            // ServiceWorker 실패 시 기본 Notification 폴백
+            new Notification(title, options);
+          });
+        } else {
+          // 서비스 워커 없는 환경용 기존 방식
+          new Notification(title, options);
+        }
       } catch (e) {
         console.warn('[Notifications] 알림 발송 실패:', e);
       }
