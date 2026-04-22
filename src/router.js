@@ -14,6 +14,7 @@ export function createAppShell() {
   return `
     <header class="app-header">
       <h1>DaRim's Moment</h1>
+      <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="다크 모드 변경" title="테마 변경">🌙</button>
     </header>
 
     <main class="page-content" id="pageContent"></main>
@@ -42,6 +43,8 @@ export function createAppShell() {
         <span class="tab-label">설정</span>
       </button>
     </nav>
+
+    <div class="app-version">v26.1.4</div>
 
     <div class="toast" id="globalToast" role="status" aria-live="polite"></div>
   `;

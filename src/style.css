@@ -54,9 +54,9 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Dark Mode */
+/* Dark Mode (OS 기본 설정) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-bg: #0F0F0F;
     --color-bg-card: #1A1A1A;
     --color-bg-input: #252525;
@@ -75,6 +75,27 @@
     --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.4);
     --shadow-button: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
+}
+
+/* 수동 Dark Mode 지정 */
+:root[data-theme="dark"] {
+  --color-bg: #0F0F0F;
+  --color-bg-card: #1A1A1A;
+  --color-bg-input: #252525;
+  --color-primary: #4A7A70;
+  --color-primary-light: #5A8A80;
+  --color-accent: #D9896A;
+  --color-accent-light: #E89A7A;
+  --color-text: #F0EDE8;
+  --color-text-muted: #8A8A8A;
+  --color-text-inverse: #0F0F0F;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-alarm-on: #D9896A;
+  --color-alarm-off: #4A4A4A;
+  --color-divider: rgba(255, 255, 255, 0.06);
+  --color-takeoff: #4A7A70;
+  --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.4);
+  --shadow-button: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* === 리셋 & 기본 === */
@@ -118,6 +139,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .app-header h1 {
@@ -128,6 +152,25 @@ body {
   color: var(--color-text-muted);
 }
 
+.theme-toggle-btn {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-text);
+  transition: all var(--transition);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.9);
+}
+
 /* === 메인 콘텐츠 === */
 .page-content {
   flex: 1;
@@ -136,7 +179,18 @@ body {
   overflow-y: auto;
 }
 
-/* === 탭 네비게이션 === */
+/* === 앱 버전 및 탭 네비게이션 === */
+.app-version {
+  position: fixed;
+  bottom: calc(var(--safe-bottom) + 70px);
+  right: max(16px, calc(50vw - 224px)); /* 480px max-width 고려 */
+  font-size: 10px;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  z-index: 90;
+  letter-spacing: 0.05em;
+}
+
 .tab-bar {
   position: fixed;
   bottom: 0;
