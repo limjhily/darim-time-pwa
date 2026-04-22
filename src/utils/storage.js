@@ -3,7 +3,13 @@
  * AsyncStorage (React Native) 역할을 대체합니다.
  */
 
-const STORAGE_KEY = 'darimT_durations';
+const STORAGE_KEY_OUTBOUND = 'darimT_durations';
+const STORAGE_KEY_INBOUND = 'darimT_durations_inbound';
+
+function getStorageKey() {
+  const dir = localStorage.getItem('darimT_direction') || 'OUTBOUND';
+  return dir === 'INBOUND' ? STORAGE_KEY_INBOUND : STORAGE_KEY_OUTBOUND;
+}
 
 /**
  * 소요시간 설정을 localStorage에 저장합니다.
@@ -11,7 +17,7 @@ const STORAGE_KEY = 'darimT_durations';
  */
 export function saveDurations(durations) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(durations));
+    localStorage.setItem(getStorageKey(), JSON.stringify(durations));
   } catch (e) {
     console.error('[Storage] 저장 실패:', e);
   }
@@ -23,7 +29,7 @@ export function saveDurations(durations) {
  */
 export function loadDurations() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(getStorageKey());
     return raw ? JSON.parse(raw) : null;
   } catch (e) {
     console.error('[Storage] 불러오기 실패:', e);
@@ -36,7 +42,7 @@ export function loadDurations() {
  */
 export function clearDurations() {
   try {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(getStorageKey());
   } catch (e) {
     console.error('[Storage] 초기화 실패:', e);
   }

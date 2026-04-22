@@ -68,12 +68,8 @@ if (dirBtn) {
     localStorage.setItem(DIR_KEY, next);
     updateDirIcon(next);
 
-    // 타임라인 다시 그리기 (home.js의 로직 업데이트 유도)
-    import('./pages/home.js').then((module) => {
-      if (document.getElementById('timelineSection')) {
-        module.refreshTimeline?.() || window.location.reload();
-      }
-    });
+    // 타임라인 그리기 및 설정화면 갱신을 위해 데이터 분리이후 페이지 전체를 리로드하는게 안전함
+    window.location.reload();
   });
 }
 
