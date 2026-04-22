@@ -22,7 +22,7 @@ export function renderHomePage() {
 
   return `
     <div class="time-input-section">
-      <p class="section-label">이륙 시간 ✈️</p>
+      <p class="section-label ${localStorage.getItem('darimT_direction') === 'INBOUND' ? 'inbound' : ''}">이륙 시간 ✈️</p>
       <div class="time-picker-card">
         <!-- iOS 호환: input을 시간 표시 위에 투명하게 overlay하여 실제 탭 이벤트로 피커 오픈 -->
         <div class="time-display-wrapper">
