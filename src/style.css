@@ -24,6 +24,7 @@
   --color-alarm-off: #B0A89A;
   --color-divider: rgba(26, 58, 52, 0.08);
   --color-takeoff: #1A3A34;
+  --color-dynamic: var(--color-primary);
 
   /* 간격 */
   --space-xs: 6px;
@@ -52,6 +53,11 @@
   /* Safe Area (iOS 노치 대응) */
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* OUTBOUND / INBOUND 동적 테마 스위치 */
+:root.is-inbound {
+  --color-dynamic: var(--color-accent);
 }
 
 /* Dark Mode (OS 기본 설정) */
@@ -170,14 +176,9 @@ body {
   cursor: pointer;
   font-size: 11px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-dynamic);
   transition: all var(--transition);
   letter-spacing: 0.05em;
-}
-
-/* 인바운드 상태일 때 버튼 스타일 (텍스트 색상만 변경) */
-.text-toggle-btn.inbound {
-  color: var(--color-accent);
 }
 
 .text-toggle-btn:active {
@@ -287,7 +288,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-dynamic);
   margin-bottom: var(--space-sm);
 }
 
@@ -306,7 +307,7 @@ body {
   font-size: 64px;
   font-weight: 700;
   letter-spacing: -2px;
-  color: var(--color-primary);
+  color: var(--color-dynamic);
   line-height: 1;
   cursor: pointer;
   transition: opacity var(--transition);
@@ -404,9 +405,9 @@ body {
   opacity: 0.75;
 }
 
-/* 기상 카드: 가장 중요 — 테라코타 강조 */
+/* 기상 카드: 가장 중요 — 테라코타 강조 (동적) */
 .timeline-card.wakeup {
-  background: var(--color-accent);
+  background: var(--color-dynamic);
   box-shadow: 0 4px 24px rgba(196, 119, 91, 0.35);
 }
 
@@ -552,6 +553,11 @@ body {
   padding-top: var(--space-md);
 }
 
+/* === 설정 페이지 === */
+.settings-section {
+  padding-top: var(--space-md);
+}
+
 .settings-title {
   font-size: 22px;
   font-weight: 700;
@@ -562,13 +568,9 @@ body {
 .section-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--color-takeoff);
+  color: var(--color-dynamic);
   margin-bottom: var(--space-xs);
   margin-left: 4px;
-}
-
-.section-label.inbound {
-  color: var(--color-accent);
 }
 
 .settings-subtitle {

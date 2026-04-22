@@ -76,11 +76,11 @@ if (dirBtn) {
 function updateDirIcon(dir) {
   if (dirBtn) {
     dirBtn.textContent = dir;
-    // INBOUND일 경우 버튼 색상을 강조하는 클래스 적용
-    if (dir === 'INBOUND') {
-      dirBtn.classList.add('inbound');
-    } else {
-      dirBtn.classList.remove('inbound');
-    }
+  }
+  // INBOUND 상태일 경우 최상단 요소(root)에 클래스 추가하여 전체 테마 변수 스위칭
+  if (dir === 'INBOUND') {
+    document.documentElement.classList.add('is-inbound');
+  } else {
+    document.documentElement.classList.remove('is-inbound');
   }
 }
