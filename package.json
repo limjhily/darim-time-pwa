@@ -1,0 +1,15 @@
+{
+  "name": "darim-t-pwa",
+  "private": true,
+  "version": "1.0.0",
+  "description": "항공 승무원을 위한 비행 일정 역산 계산기 PWA",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "vite-plugin-pwa": "^0.21.0"
+  }
+}
